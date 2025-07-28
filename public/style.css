@@ -1,0 +1,18 @@
+body{
+    background-color: rgb(240, 181, 238);
+}
+
+h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh;
+}
+.form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5vh;             /* Full viewport height */
+  margin: 0;
+  
+}
