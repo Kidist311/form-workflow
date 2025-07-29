@@ -10,8 +10,19 @@ function Form() {
     topic: '',
     message: '',
     age:'',
+    password: '',
+    confirmPassword: '',
 
 })
+
+const [showPassword, setShowPassword] = useState(false);
+
+function togglePasswordVisibility() {
+    setShowPassword(prev => !prev);
+  }
+  
+
+
 
 function handleChange(event) {
     const {name, value} = event.target;
@@ -50,7 +61,25 @@ function handleChange(event) {
                     message:prevValue.message,
                     age:value,
                 }
+        }else if(name === "password"){
+            return{
+                fname:prevValue.fname,
+                email:prevValue.email,
+                topic:prevValue.topic,
+                message:prevValue.message,
+                password:value,
+                confirmPassword: prevValue.confirmPassword,
+            }
+    }else if(name === "confirmPassword"){
+        return{
+            fname:prevValue.fname,
+            email:prevValue.email,
+            topic:prevValue.topic,
+            message:prevValue.message,
+            password:prevValue.password,
+            confirmPassword: value,
         }
+    }
 
     });
 }   
@@ -67,8 +96,11 @@ function send(event){
   }else if(input.message === ''){
     alert("Message is required!");
     return;
+  }else if(!checked){
+    alert("You must agree to the terms and conditions!");
+    return;
   }
-
+  
 
  
 
@@ -78,18 +110,26 @@ function send(event){
         message: '',
         age: '',
         topic: '',
+        password: '',
+    confirmPassword: '',
     })
      
 
 }
 
+const [checked, setChecked] = useState(false);
+function togglesubmittion() {
+    setChecked(prev => !prev);
+    
+  }
+
     return (
     <div>
-        <h1>Registration Form</h1><br/><br/>
+        <h1>Registration Form</h1> <br/><br/>
       <form className="form"  onSubmit={send}> 
         
             <label >
-            <br/><br/><p>Hello, {input.fname} {input.email} {input.age}</p>
+            <br/><br/><br/><p>Hello, {input.fname} {input.email} {input.age}</p>
                 
                 <input type="text"
                 name= "fname"
@@ -112,7 +152,31 @@ function send(event){
                 onChange={handleChange}
                 /><br/><br/>
 
-<select name="topic" value={input.topic} onChange={handleChange}>
+                <input type={showPassword ? "text" : "password"}
+                name="password"
+                placeholder='Enter yourpassword'
+                value={input.password}
+                onChange={handleChange}
+                /><br/><br/>
+
+              <input type={showPassword ? "text" : "password"}
+                name="confirmPassword"
+                placeholder='confirm Password'
+                value={input.confirmPassword}
+                onChange={handleChange}
+                /><br/><br/>
+                
+                <label>
+                    <input
+                        type="checkbox"
+                        checked={showPassword}
+                        onChange={togglePasswordVisibility}
+                     />
+                     Show Password
+                </label>
+                <br/><br/>
+
+                <select name="topic" value={input.topic} onChange={handleChange}>
                     <option value="feedback">feedback</option>
                     <option value="support">support</option>
                     <option value="others">others</option>
@@ -128,6 +192,16 @@ function send(event){
                 onChange={handleChange}
                 />
                 <br/><br/>
+
+                <label>
+                    <input
+                        type="checkbox"
+                        checked={checked}
+                        onChange={togglesubmittion}
+                     />
+                     do you agree to the term and condition
+                </label>
+                <br/>
 
             <button>Submit</button>
             </label>
