@@ -1,5 +1,5 @@
 body{
-    background-color: rgb(240, 181, 238);
+    background-color: rgb(245, 196, 243);
 }
 
 h1{
@@ -8,6 +8,7 @@ h1{
     align-items: center;
     height: 10vh;
 }
+
 .form{
     display: flex;
     justify-content: center;
