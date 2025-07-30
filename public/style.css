@@ -6,13 +6,13 @@ h1{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 30vh;
+    height: 10vh;
 }
 .form{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 5vh;             /* Full viewport height */
+    height: 30vh;             /* Full viewport height */
   margin: 0;
   
 }

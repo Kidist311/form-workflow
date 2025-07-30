@@ -106,7 +106,7 @@ function send(event){
     
   setTimeout(() => {
       setLoading(false);  //hide after 2sec
-      alert((input, null, 2)); 
+      alert(JSON.stringify(input, null, 2)); 
   }, 2000);
  
 
@@ -120,6 +120,7 @@ function send(event){
     confirmPassword: '',
     })
      
+    setHobbies([""]);
 
 }
 
@@ -131,11 +132,22 @@ function togglesubmittion() {
 
 const [loading, setLoading] = useState(false);
 
+const [hobbies, setHobbies] = useState([]);
+  // ✅ Handle hobby change
+  const handleHobbyChange = (index, event) => {
+    const updatedHobbies = [...hobbies];
+    updatedHobbies[index] = event.target.value;
+    setHobbies(updatedHobbies);
+};
 
+// ✅ Add another hobby input
+const addHobbyField = () => {
+    setHobbies([...hobbies, ""]);
+};
 
     return (
     <div>
-        <h1>Registration Form</h1> <br/><br/>
+        <h1>Registration Form</h1> <br/><br/><br/><br/><br/><br/><br/><br/>
       <form className="form"  onSubmit={send}> 
         
             <label >
@@ -203,6 +215,20 @@ const [loading, setLoading] = useState(false);
                 />
                 <br/><br/>
 
+                <h4>Hobbies</h4>
+                    {hobbies.map((hobby, index) => (
+                        <div key={index}>
+                            <input
+                                type="text"
+                                placeholder={`Hobby ${index + 1}`}
+                                value={hobby}
+                                onChange={(e) => handleHobbyChange(index, e)}
+                            /><br /><br />
+                        </div>
+                    ))}
+                    <button type="button" onClick={addHobbyField}>Add Another Hobby</button>
+                    <br /><br />
+                
                 <label>
                     <input
                         type="checkbox"
