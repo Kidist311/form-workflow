@@ -101,7 +101,13 @@ function send(event){
     return;
   }
   
+  setLoading(true); //display the loading page
 
+    
+  setTimeout(() => {
+      setLoading(false);  //hide after 2sec
+      alert((input, null, 2)); 
+  }, 2000);
  
 
    setInput({
@@ -122,6 +128,10 @@ function togglesubmittion() {
     setChecked(prev => !prev);
     
   }
+
+const [loading, setLoading] = useState(false);
+
+
 
     return (
     <div>
@@ -204,9 +214,12 @@ function togglesubmittion() {
                 <br/>
 
             <button>Submit</button>
+
+            {loading && <p>Loading...</p>}
             </label>
             
       </form>
+     
     </div>
     )
 } 
