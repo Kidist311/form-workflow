@@ -7,7 +7,7 @@ function Form() {
     = useState({
     fname: '',
     email: '',
-    topic: '',
+    //topic: '',
     message: '',
     age:'',
     password: '',
@@ -20,8 +20,10 @@ const [showPassword, setShowPassword] = useState(false);
 function togglePasswordVisibility() {
     setShowPassword(prev => !prev);
   }
-  
-
+ const [topic, setTopic] = useState("");
+ const [school, setSchool] = useState("");
+ const [company, setCompany] = useState("");
+ 
 
 
 function handleChange(event) {
@@ -39,46 +41,33 @@ function handleChange(event) {
                 email:value,
                 age: prevValue.age,
             }
-        }else if(name === "topic"){
-            return{
-                fname:prevValue.fname,
-                email:prevValue.email,
-                topic:value,
-                
-            }
         }else if(name === "message"){
             return{
-                fname:prevValue.fname,
-                email:prevValue.email,
-                topic:prevValue.topic,
+                ...prevValue,
                 message:value,
             }
         }else if(name === "age"){
                 return{
-                    fname:prevValue.fname,
-                    email:prevValue.email,
-                    topic:prevValue.topic,
-                    message:prevValue.message,
+                    ...prevValue,
                     age:value,
                 }
         }else if(name === "password"){
             return{
-                fname:prevValue.fname,
-                email:prevValue.email,
-                topic:prevValue.topic,
-                message:prevValue.message,
+                ...prevValue,
                 password:value,
-                confirmPassword: prevValue.confirmPassword,
+               
             }
     }else if(name === "confirmPassword"){
         return{
-            fname:prevValue.fname,
-            email:prevValue.email,
-            topic:prevValue.topic,
-            message:prevValue.message,
-            password:prevValue.password,
+            ...prevValue,
             confirmPassword: value,
         }
+    } else if (name === "file") {
+        const file = event.target.files[0];
+        return {
+            ...prevValue,
+            file: file ? file.name : "",
+        };
     }
 
     });
@@ -118,6 +107,7 @@ function send(event){
         topic: '',
         password: '',
     confirmPassword: '',
+    file: '',
     })
      
     setHobbies([""]);
@@ -147,11 +137,11 @@ const addHobbyField = () => {
 
     return (
     <div>
-        <h1>Registration Form</h1> <br/><br/><br/><br/><br/><br/><br/><br/>
+        <h1>Registration Form</h1> 
       <form className="form"  onSubmit={send}> 
         
             <label >
-            <br/><br/><br/><p>Hello, {input.fname} {input.email} {input.age}</p>
+            <br/><br/><br/><p>Hello, {input.fname} {input.email} {input.age} selected file is  {input.file}</p>
                 
                 <input type="text"
                 name= "fname"
@@ -198,12 +188,32 @@ const addHobbyField = () => {
                 </label>
                 <br/><br/>
 
-                <select name="topic" value={input.topic} onChange={handleChange}>
-                    <option value="feedback">feedback</option>
-                    <option value="support">support</option>
+                <select name="topic" value={topic} onChange={(e) => setTopic(e.target.value)}>
+                    <option value="job">job</option>
+                    <option value="student">student</option>
                     <option value="others">others</option>
                     <option></option>
                 </select><br/><br/>
+
+                {topic === "student" && (
+                <input
+                    type="text"
+                    placeholder="Enter your school name"
+                    value={school}
+                    onChange={(e) => setSchool(e.target.value)}
+                />
+                )}
+
+                    {topic === "employee" && (
+                    <input
+                        type="text"
+                        placeholder="Enter your company name"
+                        value={company}
+                        onChange={(e) => setCompany(e.target.value)}
+                    />
+                    )}
+                    <br/><br/>
+
 
 
                 <textarea
@@ -228,7 +238,11 @@ const addHobbyField = () => {
                     ))}
                     <button type="button" onClick={addHobbyField}>Add Another Hobby</button>
                     <br /><br />
+                <input type="file"
+                    name="file"
+                    onChange={handleChange}
                 
+                /><br/><br/>
                 <label>
                     <input
                         type="checkbox"
