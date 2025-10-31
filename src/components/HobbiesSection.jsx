@@ -2,23 +2,25 @@ import React from "react";
 
 export default function HobbiesSection({ hobbies, handleHobbyChange, addHobbyField }) {
   return (
-    <div>
-      <h4>Hobbies</h4>
+    <div className="form-section">
+      <h3 className="section-title">Hobbies</h3>
+      
       {hobbies.map((hobby, index) => (
-        <div key={index}>
+        <div key={index} className="form-group">
+          <label className="form-label">Hobby {index + 1}</label>
           <input
             type="text"
-            placeholder={`Hobby ${index + 1}`}
+            placeholder={`Enter hobby ${index + 1}`}
             value={hobby}
             onChange={(e) => handleHobbyChange(index, e)}
+            className="form-input"
           />
-          <br /><br />
         </div>
       ))}
-      <button type="button" onClick={addHobbyField}>
-        Add Another Hobby
+      
+      <button type="button" onClick={addHobbyField} className="add-hobby-btn">
+        + Add Another Hobby
       </button>
-      <br /><br />
     </div>
   );
 }
