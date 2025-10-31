@@ -39,29 +39,28 @@ src/
 1. Clone the repository:
 
 
-git clone <your-repo-url>
-cd form-workflow
-Install dependencies:
+- git clone <https://github.com/Kidist311/form-workflow.git>
+- cd form-workflow
+- Install dependencies:
 
 
-npm install
-Running the Project
-Start the development server:
+- npm install
+- Running the Project
+- Start the development server:
 
-npm start
-The app will open in your default browser at http://localhost:3000
+- npm start
+- The app will open in your default browser at http://localhost:3000
 
 
-Technologies Used
-React
+**Technologies Used**
+- React
 
-React Router DOM
+- React Router DOM
 
-HTML5, CSS3, JavaScript (ES6+)
+- HTML5, CSS3, JavaScript (ES6+)
 
-Create React App
 
-Notes
+**Notes**
 Ensure all dependencies are installed using npm install.
 
 CSS files are in src/styles/ and imported into components.
